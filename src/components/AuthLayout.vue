@@ -2,21 +2,7 @@
   <div class="auth-layout">
     <!-- Logo top-left (on top of photo) -->
     <router-link to="/" class="logo" id="logo-home" aria-label="Kostopia - Beranda">
-      <svg class="logo-icon" viewBox="0 0 48 44" fill="none" aria-hidden="true">
-        <!-- roof -->
-        <path d="M3 21L24 3L45 21" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- chimney -->
-        <path d="M36 6V12.5" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
-        <!-- walls -->
-        <path d="M9 17V41H39V17" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
-        <!-- letter K -->
-        <path d="M15 22V37M15 30L22 22M16.5 28.5L22.5 37" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- window -->
-        <rect x="26.5" y="22" width="8" height="8" stroke="currentColor" stroke-width="2.2"/>
-        <path d="M30.5 22V30M26.5 26H34.5" stroke="currentColor" stroke-width="1.6"/>
-        <!-- door -->
-        <path d="M27 41V34H33V41" stroke="currentColor" stroke-width="2.2"/>
-      </svg>
+      <KostopiaLogo class="logo-icon" />
       <span class="logo-text">KOSTOPIA</span>
     </router-link>
 
@@ -69,6 +55,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import KostopiaLogo from './KostopiaLogo.vue'
 
 const props = defineProps({
   showBack: { type: Boolean, default: false },
@@ -110,7 +97,7 @@ function goBack() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   color: #fff;
   filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.45));
   transition: transform 0.25s ease;
@@ -118,12 +105,12 @@ function goBack() {
 
 .logo:hover { transform: scale(1.05); }
 
-.logo-icon { width: 40px; height: 37px; }
+.logo-icon { width: 42px; height: auto; }
 
 .logo-text {
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.4px;
 }
 
 /* ─── Cream panel ─── */
@@ -227,7 +214,7 @@ function goBack() {
 /* ─── Responsive ─── */
 @media (min-width: 1280px) {
   .panel-content { max-width: 340px; }
-  .logo-icon { width: 48px; height: 44px; }
+  .logo-icon { width: 50px; }
   .logo-text { font-size: 10.5px; }
 }
 
