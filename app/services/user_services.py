@@ -32,6 +32,7 @@ def authenticate_user(db: Session, email: str, password: str):
     if not pwd_context.verify(password, user.password_hash):
         return False 
     
-    return user 
 
-    
+# Mencari user berdasarkan alamat email
+def get_user_by_email(db: Session, email: str):
+    return db.query(User).filter(User.email == email).first()

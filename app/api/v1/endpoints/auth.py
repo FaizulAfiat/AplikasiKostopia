@@ -12,7 +12,7 @@ router = APIRouter()
 # API Register: mendaftarkan akun pemilik baru (ditolak jika email sudah terdaftar)
 @router.post("/register", response_model=UserResponse)
 def register_pemilik(user: UserCreatePemilik, db: Session = Depends(get_db)):
-    cek_email = db.query(User).filter(User.email == user.email).first()
+    cek_email = user_services.get_user_by_email(db, user.email)
     if cek_email:
         raise HTTPException(status_code=400, detail="Email sudah terdaftar silahkan gunakan email lain")   
 

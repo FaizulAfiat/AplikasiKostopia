@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.core.config import settings
 from app.core.database import engine, Base
 from app.api.v1.api import api_router
+from app.models import domain
 
 # Membuat semua tabel di database secara otomatis jika belum ada
 Base.metadata.create_all(bind=engine)
