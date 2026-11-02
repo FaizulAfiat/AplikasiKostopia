@@ -1,16 +1,13 @@
+from datetime import datetime, timedelta, timezone
 import jwt
-from datetime import datetime, timedelta
+from app.core.config import settings
 
-# Pengaturan token JWT: kunci rahasia, algoritma, dan masa berlaku (24 jam)
-SECRET_KEY = "rahasia_kostopia_super_aman_123"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
+# Token configuration comes from environment/.env through Settings.
+ALGORITHM = settings.ALGORITHM
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
 
-# Membuat token login (JWT) berisi data user dan waktu kedaluwarsa
 def create_access_token(data: dict):
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
-
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=ALGORITHM)

@@ -13,14 +13,14 @@ router = APIRouter()
 def tambah_kamar(
     kamar_in: RoomCreate, 
     db: Session = Depends(get_db), 
-    current_user = Depends(get_pemilik_saja) # Proteksi RBAC: Hanya Pemilik
+    current_user = Depends(get_pemilik_saja) 
 ):
     return kamar_service.create_kamar(db, kamar_in)
 
 @router.get("/", response_model=List[RoomResponse])
 def ambil_semua_kamar(
     db: Session = Depends(get_db),
-    current_user = Depends(get_validasi_user) # Pemilik & Penghuni bisa melihat list kamar
+    current_user = Depends(get_validasi_user) 
 ):
     return kamar_service.get_all_kamar(db)
 
@@ -29,7 +29,7 @@ def ubah_data_kamar(
     kamar_id: int, 
     kamar_in: RoomUpdate, 
     db: Session = Depends(get_db), 
-    current_user = Depends(get_pemilik_saja) # Proteksi RBAC: Hanya Pemilik
+    current_user = Depends(get_pemilik_saja) 
 ):
     return kamar_service.update_kamar(db, kamar_id, kamar_in)
 

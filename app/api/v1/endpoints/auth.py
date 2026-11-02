@@ -9,7 +9,6 @@ from app.api.v1.endpoints.deps import get_validasi_user
 
 router = APIRouter()
 
-# API Register: mendaftarkan akun pemilik baru (ditolak jika email sudah terdaftar)
 @router.post("/register", response_model=UserResponse)
 def register_pemilik(user: UserCreatePemilik, db: Session = Depends(get_db)):
     cek_email = user_services.get_user_by_email(db, user.email)
@@ -22,7 +21,7 @@ def register_pemilik(user: UserCreatePemilik, db: Session = Depends(get_db)):
 
 
 
-# API Login: untuk pemilik dan penghuni, mengembalikan token akses dan peran user
+
 @router.post("/login")
 def login_universal(user_credentials: UserLogin, db: Session = Depends(get_db)):
     
@@ -45,7 +44,6 @@ def login_universal(user_credentials: UserLogin, db: Session = Depends(get_db)):
         "role": user.peran.value
     }
 
-# API Profil: menampilkan data user yang sedang login (butuh token)
 @router.get("/me", response_model=UserResponse)
 def profil_saya(current_user: User = Depends(get_validasi_user)):
     return current_user

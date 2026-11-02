@@ -29,7 +29,7 @@ class User(Base):
     sewa = relationship("Lease", back_populates="penyewa")
 
 # Tabel aturan/tata tertib kos
-class Rule(Base):
+class Rules(Base):
     __tablename__ = "rules"
     id = Column(Integer, primary_key=True, index=True)
     poin_aturan = Column(Text)
