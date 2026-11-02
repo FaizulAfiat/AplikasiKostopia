@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { login as loginService } from '../services/auth'
+import { setAuthToken } from '../services/api'
 import { useRouter } from 'vue-router'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -15,8 +16,9 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(payload) {
     const res = await loginService(payload)
     token.value = res.token || ''
+    setAuthToken(token.value)
     user.value = res.user || null
-    role.value = payload.role
+    role.value = res.user?.role || payload.role
     // redirect based on role
     if (role.value === 'pengelola') {
       router.replace({ path: '/dashboard/pemilik' })
@@ -28,6 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   function logout() {
     token.value = ''
+    setAuthToken('')
     user.value = null
     role.value = ''
     router.replace({ path: '/' })

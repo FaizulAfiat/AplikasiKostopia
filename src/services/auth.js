@@ -12,18 +12,29 @@
 //
 // Without VITE_API_URL a mock backend is used. Mock account: demo@kostopia.id / password123
 
-import { API_URL, ApiError, post } from './api'
+import { API_URL, ApiError, post, get, setAuthToken } from './api'
 
 // Views import AuthError; it is the same class as ApiError.
 export { ApiError as AuthError }
 
 const LOGIN_AS_FORM = import.meta.env.VITE_AUTH_LOGIN_FORM === 'true'
 
-/** Normalize various FastAPI login response shapes into { token, user }. */
+function mapRole(role, fallbackRole = 'pengelola') {
+  const normalized = String(role || '').toLowerCase()
+  if (['pemilik', 'pengelola', 'owner'].includes(normalized)) return 'pengelola'
+  if (['penghuni', 'anak-kost', 'tenant'].includes(normalized)) return 'anak-kost'
+  return fallbackRole
+}
+
+function normalizeUser(user = {}, fallbackRole) {
+  return { ...user, name: user.name || user.nama_lengkap || '', email: user.email || '',
+    phone: user.phone || user.nomor_telepon || '', role: mapRole(user.role || user.peran, fallbackRole) }
+}
+
 function normalizeLogin(data, fallbackRole) {
   const token = data?.access_token || data?.token || ''
-  const user = data?.user || { email: data?.email, name: data?.name }
-  return { token, user: { ...user, role: user?.role || data?.role || fallbackRole } }
+  const user = data?.user || { email: data?.email, name: data?.name, role: data?.role }
+  return { token, user: normalizeUser(user, fallbackRole) }
 }
 
 /* ─────────── Real backend ─────────── */
@@ -31,8 +42,19 @@ async function apiLogin({ email, password, role }) {
   try {
     const data = LOGIN_AS_FORM
       ? await post('/auth/login', { username: email, password }, { form: true, auth: false })
-      : await post('/auth/login', { email, password, role }, { auth: false })
-    return normalizeLogin(data, role)
+      : await post('/auth/login', { email, password }, { auth: false })
+    const normalized = normalizeLogin(data, role)
+    if (normalized.token) {
+      setAuthToken(normalized.token)
+      try {
+        const me = await get('/auth/me')
+        normalized.user = normalizeUser(me, data?.role || role)
+      } catch (err) {
+        setAuthToken('')
+        throw err
+      }
+    }
+    return normalized
   } catch (err) {
     if (err instanceof ApiError) {
       if (err.status === 401) {
@@ -52,10 +74,19 @@ async function apiLogin({ email, password, role }) {
 
 async function apiRegister(payload) {
   try {
-    return await post('/auth/register', payload, { auth: false })
+    return await post('/auth/register', {
+      nama_lengkap: payload.name,
+      email: payload.email,
+      nomor_telepon: payload.phone || null,
+      password: payload.password,
+    }, { auth: false })
   } catch (err) {
     if (err instanceof ApiError && err.status === 409 && !err.data?.detail) {
       err.message = 'Email sudah terdaftar. Silakan masuk.'
+    }
+    // Backend returns 400 with detail when the email is already registered.
+    if (err instanceof ApiError && err.status === 400 && /email/i.test(err.data?.detail || '')) {
+      err.code = 'CONFLICT'
     }
     throw err
   }

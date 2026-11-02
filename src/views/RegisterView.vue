@@ -148,10 +148,9 @@ import { register, AuthError } from '../services/auth'
 const route = useRoute()
 const router = useRouter()
 
-const role = computed(() => (route.query.role === 'pengelola' ? 'pengelola' : 'anak-kost'))
-const tagline = computed(() =>
-  role.value === 'pengelola' ? 'Mulai Kelola Kos Anda' : 'Mulai Cari Kos Impian Anda'
-)
+// Registration is only available for Pemilik (pengelola); tenants are added by the owner.
+const role = computed(() => 'pengelola')
+const tagline = computed(() => 'Mulai Kelola Kos Anda')
 
 const formData = ref({
   name: '',
