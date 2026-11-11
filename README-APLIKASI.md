@@ -1,13 +1,13 @@
 # Kostopia — Aplikasi Mobile (Vue 3 + Capacitor)
 
-Aplikasi Android untuk Pemilik Kos dan Penghuni Kos. Tampilan dibuat dengan Vue 3, dibungkus menjadi APK dengan Capacitor, dan terhubung ke backend FastAPI + PostgreSQL (branch `rava-backend`, lihat `docs/API.md` di sana).
+Aplikasi Android untuk Pemilik Kos dan Penghuni Kos. Tampilan dibuat dengan Vue 3, dibungkus menjadi APK dengan Capacitor, dan terhubung ke backend FastAPI + PostgreSQL di folder [`backend/`](backend/) (kontrak API: [`backend/docs/API.md`](backend/docs/API.md)).
 
 ## Prasyarat
 
 | Kebutuhan | Versi |
 |---|---|
 | Node.js | 22 LTS atau lebih baru |
-| Backend Kostopia | sudah berjalan di port 8000 (lihat README-RUN-LOGIN.md di repo backend) |
+| Backend Kostopia | sudah berjalan di port 8000 — klik dua kali `backend\jalankan-server.bat` (persiapan awal: [`backend/README-RUN-LOGIN.md`](backend/README-RUN-LOGIN.md)) |
 | Untuk membuat APK | Java JDK 21 + Android SDK (platform 35, build-tools 35) |
 
 ## 1. Menjalankan di browser (paling cepat untuk mencoba)
@@ -53,6 +53,7 @@ Emulator Android otomatis memakai `http://10.0.2.2:8000` (alamat laptop dari dal
 ## Struktur kode
 
 ```
+backend/         Backend FastAPI + PostgreSQL (app/, tests/, docs/API.md, jalankan-server.bat)
 src/
   services/      api.js (klien HTTP + token), endpoints.js (satu fungsi per endpoint), config.js (alamat server)
   stores/        auth.js (sesi login), ui.js (toast, dialog, konfirmasi)
