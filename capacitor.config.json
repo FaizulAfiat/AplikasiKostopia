@@ -1,0 +1,19 @@
+{
+  "appId": "id.kostopia.app",
+  "appName": "Kostopia",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  },
+  "plugins": {
+    "StatusBar": {
+      "backgroundColor": "#26020E",
+      "style": "DARK",
+      "overlaysWebView": false
+    }
+  }
+}

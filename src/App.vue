@@ -1,11 +1,20 @@
-<script setup></script>
+<script setup>
+import AppToast from '@/components/feedback/AppToast.vue'
+import AlertDialog from '@/components/feedback/AlertDialog.vue'
+import ConfirmDialog from '@/components/feedback/ConfirmDialog.vue'
+import LoadingOverlay from '@/components/feedback/LoadingOverlay.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
-</template>
+  <!-- Aplikasi mobile: di HP tampil penuh layar, di laptop tampil seperti ponsel di tengah -->
+  <div class="auth-stage">
+    <div class="app-shell">
+      <RouterView />
+    </div>
+  </div>
 
-<style scoped></style>
+  <AppToast />
+  <LoadingOverlay />
+  <AlertDialog />
+  <ConfirmDialog />
+</template>

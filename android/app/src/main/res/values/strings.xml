@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Kostopia</string>
+    <string name="title_activity_main">Kostopia</string>
+    <string name="package_name">id.kostopia.app</string>
+    <string name="custom_url_scheme">id.kostopia.app</string>
+</resources>

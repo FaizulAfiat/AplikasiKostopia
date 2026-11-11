@@ -1,0 +1,836 @@
+/* =========================================================
+   Kostopia — Design tokens & gaya dasar
+   Sumber: desain Google Stitch (Kostopia Design System)
+   ========================================================= */
+:root {
+  --maroon: #26020e;
+  --maroon-hover: #3d0317;
+  --crimson: #700020;
+  --crimson-hover: #850026;
+  --ink: #1c0a10;
+  --slate: #5e5156;
+  --mist: #f3efee;
+  --fog: #faf8f7;
+  --peach: #fbe1d1;
+  --peach-border: #eac4b0;
+  --sienna: #5d2a1a;
+  --border: #e8e1df;
+
+  --success: #047857;
+  --success-bg: #ecfdf5;
+  --success-border: #a7f3d0;
+  --danger-bg: #ffe4e6;
+  --danger-text: #9f1239;
+  --warning-bg: #fef3c7;
+  --warning-text: #92400e;
+
+  --font-brand: 'Bebas Neue', Impact, sans-serif;
+  --font-editorial: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --radius-card: 24px;
+  --radius-field: 14px;
+
+  --shadow-subtle: 0 4px 20px -2px rgba(38, 2, 14, 0.05);
+  --shadow-button: 0 4px 6px -1px rgba(38, 2, 14, 0.15);
+  --shadow-toast: 0 10px 30px rgba(38, 2, 14, 0.15);
+  --shadow-modal: 0 20px 40px -10px rgba(38, 2, 14, 0.25);
+
+  --shell-width: 440px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--fog);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+/* Halaman autentikasi: mobile-first, di layar lebar tampil seperti ponsel di tengah */
+.app-shell {
+  position: relative;
+  width: 100%;
+  max-width: var(--shell-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--fog);
+}
+
+@media (min-width: 480px) {
+  .auth-stage {
+    min-height: 100vh;
+    background: #120b0e;
+  }
+
+  .app-shell {
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* ---------- Layout layar ---------- */
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 24px 32px;
+}
+
+/* ---------- Tipografi ---------- */
+.eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--crimson);
+}
+
+.title-editorial {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
+.overline {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+/* ---------- Form ---------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.req {
+  color: var(--crimson);
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--slate);
+  cursor: pointer;
+}
+
+.checkbox input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--crimson);
+  cursor: pointer;
+}
+
+/* ---------- Tombol ---------- */
+.btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: var(--radius-field);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--crimson);
+  color: #fff;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--crimson-hover);
+}
+
+.btn-dark {
+  background: var(--maroon);
+  color: #fff;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-dark:hover:not(:disabled) {
+  background: var(--maroon-hover);
+}
+
+.btn-soft {
+  background: var(--mist);
+  color: var(--ink);
+}
+
+.btn-soft:hover:not(:disabled) {
+  background: #e9e3e2;
+}
+
+.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--crimson);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Kartu & badge ---------- */
+.card {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-subtle);
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-danger {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+/* ---------- Overlay (modal) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(2px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--crimson);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Komponen aplikasi (dalam aplikasi, setelah login)
+   Sesuai Kostopia Design System
+   ========================================================= */
+:root {
+  --status-success-bg: #e2f0e6;
+  --status-success-text: #1e5b37;
+  --status-warning-bg: #fbefd2;
+  --status-warning-text: #7a4e00;
+  --status-danger-bg: #f9dce2;
+  --status-danger-text: #8a0f2e;
+  --status-info-bg: #e1e8f6;
+  --status-info-text: #22407a;
+}
+
+.brand-wordmark {
+  font-family: var(--font-brand);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--maroon);
+}
+
+.brand-wordmark--light {
+  color: #fff;
+}
+
+/* ---------- Status ---------- */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.status--success {
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
+}
+
+.status--warning {
+  background: var(--status-warning-bg);
+  color: var(--status-warning-text);
+}
+
+.status--danger {
+  background: var(--status-danger-bg);
+  color: var(--status-danger-text);
+}
+
+.status--info {
+  background: var(--status-info-bg);
+  color: var(--status-info-text);
+}
+
+.status--neutral {
+  background: var(--mist);
+  color: var(--slate);
+}
+
+/* ---------- Tombol (radius 14px) ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-field);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.button--primary {
+  background: var(--crimson);
+  color: #fff;
+}
+
+.button--primary:hover:not(:disabled) {
+  background: var(--crimson-hover);
+}
+
+.button--dark {
+  background: var(--maroon);
+  color: #fff;
+}
+
+.button--dark:hover:not(:disabled) {
+  background: var(--maroon-hover);
+}
+
+.button--outline {
+  background: #fff;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.button--outline:hover:not(:disabled) {
+  background: var(--mist);
+}
+
+.button--sm {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.button:disabled {
+  background: var(--mist);
+  border-color: transparent;
+  color: rgba(94, 81, 86, 0.6);
+  cursor: not-allowed;
+}
+
+.text-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--crimson);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Pil / tab ---------- */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pill:hover {
+  border-color: var(--slate);
+}
+
+.pill.is-active {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+}
+
+.pill--on-dark {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.pill--on-dark:hover {
+  border-color: #fff;
+}
+
+.pill--on-dark.is-active {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+
+/* ---------- Permukaan (radius 24px) ---------- */
+.panel {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.panel-title {
+  font-family: var(--font-editorial);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.panel-desc {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--slate);
+}
+
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.stat-card {
+  padding: 20px 22px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.stat-card__value {
+  margin-top: 10px;
+  font-family: var(--font-editorial);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.stat-card__unit {
+  margin-left: 4px;
+  font-size: 18px;
+  color: var(--slate);
+}
+
+.stat-card__note {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--slate);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+/* ---------- Judul halaman ---------- */
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-head__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-title {
+  margin-top: 6px;
+  font-family: var(--font-editorial);
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.page-desc {
+  max-width: 640px;
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+/* Konten halaman penghuni (di bawah header maroon) */
+.resident-content {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 16px 56px;
+}
+
+.resident-content--overlap {
+  position: relative;
+  margin-top: -88px;
+}
+
+/* ---------- Input (putih bergaris, radius 14px) ---------- */
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.field-label__hint {
+  font-weight: 400;
+  color: var(--slate);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-field);
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.textarea {
+  min-height: 96px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(94, 81, 86, 0.6);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(112, 0, 32, 0.1);
+}
+
+.input.is-invalid,
+.textarea.is-invalid {
+  border-color: var(--crimson);
+  background: #fff7f8;
+}
+
+.field-error {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--crimson);
+}
+
+.empty-state {
+  padding: 40px 24px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-card);
+  font-size: 14px;
+  color: var(--slate);
+  text-align: center;
+}
+
+/* =========================================================
+   Pola layar aplikasi mobile
+   ========================================================= */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Isi halaman di bawah AppHeader, menyisakan ruang untuk BottomNav */
+.app-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 16px calc(100px + env(safe-area-inset-bottom));
+}
+
+/* Halaman tanpa BottomNav (form/detail) */
+.app-page--plain {
+  padding-bottom: calc(32px + env(safe-area-inset-bottom));
+}
+
+/* Konten menumpang ke header maroon (beranda) */
+.app-page--overlap {
+  margin-top: -24px;
+  position: relative;
+}
+
+/* Tombol aksi melayang (+) di atas BottomNav */
+.fab {
+  position: fixed;
+  right: max(16px, calc(50% - var(--shell-width) / 2 + 16px));
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  z-index: 25;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--crimson);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px -8px rgba(112, 0, 32, 0.6);
+}
+
+.fab:active {
+  transform: scale(0.97);
+}
+
+/* Kartu daftar yang bisa ditekan */
+.list-card {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  text-align: left;
+  color: inherit;
+}
+
+.list-card:active {
+  background: var(--fog);
+}
+
+.list-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.list-card__title {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.list-card__meta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--slate);
+}
+
+/* Baris label–nilai (rincian) */
+.detail-list {
+  margin: 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.detail-row:last-child {
+  border-bottom: 0;
+}
+
+.detail-row dt {
+  color: var(--slate);
+}
+
+.detail-row dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 500;
+}
+
+.detail-row--total {
+  font-weight: 700;
+}
+
+.detail-row--total dt {
+  color: var(--ink);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.button--block {
+  width: 100%;
+}
+
+.button--danger-outline {
+  background: #fff;
+  border-color: var(--crimson);
+  color: var(--crimson);
+}
+
+.select {
+  width: 100%;
+  padding: 12px 40px 12px 14px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%235E5156' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M19 9l-7 7-7-7'/%3E%3C/svg%3E") no-repeat right 14px center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-field);
+  font-size: 14px;
+  color: var(--ink);
+  appearance: none;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(112, 0, 32, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.form-actions > .button {
+  flex: 1;
+}
+
+.select.is-invalid {
+  border-color: var(--crimson);
+  background-color: #fff7f8;
+}
